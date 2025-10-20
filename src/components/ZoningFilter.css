@@ -1,0 +1,45 @@
+/* ZoningFilter.css */
+
+.zoning-filter {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 250px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-z-toggle {
+  background-color: transparent;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-z-toggle:focus {
+  outline: none;
+}
+
+.zoning-filter-options {
+  margin-top: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 5px;
+  border-top: 1px solid #eee;
+  font-size: 0.75rem;
+}
+
+.zoning-filter-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.zoning-filter-options::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}

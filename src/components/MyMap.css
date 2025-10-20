@@ -1,0 +1,124 @@
+/* MyMap.css */
+
+/* Legend, parcel pop-ups, and map labels styling */
+
+.legend {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  line-height: 18px;
+  color: #333;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  z-index: 900;
+}
+
+.legend * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.legend i {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+  opacity: 0.8;
+  border: 1px solid #999;
+}
+
+.parcel-popup {
+  font-size: 12px;
+  font-weight: normal;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.senate-dist-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #b2c200;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.house-dist-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #006e02;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.city-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: black;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.voter-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #4C0073;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.sewer-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #38A800;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.cdp-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #74002c;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.neighborhood-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #311432;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.planning-district-label {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #333;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+}

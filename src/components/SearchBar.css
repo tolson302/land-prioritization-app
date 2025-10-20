@@ -1,0 +1,43 @@
+/* SearchBar.css */
+
+.search-submit-style {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.search-input-style {
+    padding: 6px;
+    width: 250px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.search-button-style {
+    padding: 6px;
+    margin-left: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.suggestions-list-style {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+.suggestions-style {
+    padding: 6px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}

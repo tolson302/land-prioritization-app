@@ -1,0 +1,75 @@
+/* WeightsWidget.css */
+
+.weights-widget {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #4287C7;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  width: 220px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.75rem
+}
+
+.weight-input input[type="range"] {
+    width: 100%;
+    margin-top: 4px;
+    accent-color: #043E74;
+    font-size: 0.75rem;
+}
+
+.weight-input label {
+  margin-right: 8px;
+}
+
+.reset-button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #4287C7;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #e0e0e0;
+}
+
+.toggle-button {
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toggle-button:hover {
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;    
+}
+
+.weights-widget-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+}
