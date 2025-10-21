@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
-import mapData from './../data/Parcels.json';
+// import mapData from './../data/Parcels.json';
 import cities from './../data/Cities.json';
 import schoolDistricts from './../data/SchoolDistricts.json';
 import basinRec from './../data/BasinRec.json';
@@ -209,6 +209,7 @@ class MyMap extends Component {
     render() {
 
         const {
+            geoData, // Remove?
             selectedVType, // Remove?
             selectedOwnerType,
             selectedGrWalkTime,
@@ -250,8 +251,11 @@ class MyMap extends Component {
             selectedOverlays
         } = this.props;
 
-        let filteredFeatures = mapData.features.filter(feature => {
+        let filteredFeatures = geoData.features.filter(feature => {
         const props = feature.properties || {};
+        /* */
+        const { geoData } = this.props;
+        /* */
 /* Remove? */
         const matchVacant =
             selectedVType === 'All' || props.VACANT === selectedVType;

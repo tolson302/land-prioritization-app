@@ -1,10 +1,10 @@
 /* App.js */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MyMap from './components/MyMap';
 import WeightsWidget from './components/WeightsWidget';
 import OwnerTypeFilter from './components/OwnerTypeFilter';
-import parcelData from './data/Parcels.json';
+// import parcelData from './data/Parcels.json';
 import Header from './components/Header';
 import GroceryDistanceFilter from './components/GroceryDistanceFilter';
 import SchoolDistanceFilter from './components/SchoolDistanceFilter';
@@ -39,10 +39,20 @@ const defaultWeights = {
 };
 
 function App() {
+  /* */
+  const [geoData, setGeoData] = useState(null);
   const [selectedParcel, setSelectedParcel] = React.useState(null); // Clear!
 
   const [isParcelOpen, setIsParcelOpen] = React.useState(false) // Remove??
+  useEffect(() => {
+    fetch('/data/Parcels.json')
+    .then((res) => res.json())
+    .then((data) => setGeoData(data))
+    .catch((err) => console.error('Error loading GeoJSON:', err));
+  }, []);
 
+  
+  /* */
   const [weights, setWeights] = useState(defaultWeights);
   const [selectedType, setSelectedType] = useState('All');
   /* */
@@ -96,10 +106,15 @@ function App() {
   const [selectedSeValue, setSelectedSeValue] = useState('All');
   const [selectedCoValue, setSelectedCoValue] = useState('All')
   const [selectedWuValue, setSelectedWuValue] = useState('All');
+  /* */
+  const [selectedBasemap, setSelectedBasemap] = useState('osm');
+const [selectedOverlays, setSelectedOverlays] = useState([]);
+  /* */
+  if (!geoData) return <div>Loading map data...</div>;
 
 const ownerTypes = Array.from(
   new Set(
-    parcelData.features
+    geoData.features
       .map(f => f.properties?.OwnerType)
       .filter(Boolean)
   )
@@ -107,14 +122,14 @@ const ownerTypes = Array.from(
 /* */
 const vacantTypes = Array.from(
   new Set(
-    parcelData.features
+    geoData.features
       .map(f => f.properties?.VACANT)
       .filter(Boolean)
   )
 )
 /* */
 const zoningTypes = Array.from(
-  new Set(parcelData.features.map(f => f.properties?.ZONING).filter(Boolean))
+  new Set(geoData.features.map(f => f.properties?.ZONING).filter(Boolean))
 );
 
   const handleClearFilters = () => {
@@ -157,8 +172,7 @@ const zoningTypes = Array.from(
     setSelectedVType('All'); // Remove?
   };
 
-const [selectedBasemap, setSelectedBasemap] = useState('osm');
-const [selectedOverlays, setSelectedOverlays] = useState([]);
+
 
 
   return (
@@ -336,6 +350,9 @@ const [selectedOverlays, setSelectedOverlays] = useState([]);
             resetWeights={resetWeights}
           />
           <MyMap 
+            
+            geoData={geoData}
+            
             onParcelClick={setSelectedParcel} selectedParcel={selectedParcel} // Remove?
             weights={weights}
             selectedOwnerType={selectedType}
