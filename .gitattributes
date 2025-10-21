@@ -1,2 +1,4 @@
 *.geojson filter=lfs diff=lfs merge=lfs -text
 src/data/Parcels.json filter=lfs diff=lfs merge=lfs -text
+public/data/Parcels.json filter=lfs diff=lfs merge=lfs -text
+public/data/Parcels.json filter=lfs diff=lfs merge=lfs -text
