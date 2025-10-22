@@ -45,11 +45,21 @@ function App() {
 
   const [isParcelOpen, setIsParcelOpen] = React.useState(false) // Remove??
   useEffect(() => {
-    fetch('/data/Parcels.json')
-    .then((res) => res.json())
-    .then((data) => setGeoData(data))
-    .catch((err) => console.error('Error loading GeoJSON:', err));
-  }, []);
+    // fetch('/data/Parcels.json')
+    fetch('https://storage.googleapis.com/land-prioritization-app-data/Parcels.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('HTTP error! status: ${res.status}');
+        }
+        return res.json();
+      })
+      .then((data) => setGeoData(data))
+      .catch((err) => console.error('Error loading GeoJSON:', err));
+    }, []);
+  //   .then((res) => res.json())
+  //   .then((data) => setGeoData(data))
+  //   .catch((err) => console.error('Error loading GeoJSON:', err));
+  // }, []);
 
   
   /* */
@@ -108,7 +118,7 @@ function App() {
   const [selectedWuValue, setSelectedWuValue] = useState('All');
   /* */
   const [selectedBasemap, setSelectedBasemap] = useState('osm');
-const [selectedOverlays, setSelectedOverlays] = useState([]);
+  const [selectedOverlays, setSelectedOverlays] = useState([]);
   /* */
   if (!geoData) return <div>Loading map data...</div>;
 
