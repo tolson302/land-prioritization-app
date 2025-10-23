@@ -115,19 +115,27 @@
 }
 
 .legend-button {
-  background: #b9d6f1;
+  background: linear-gradient(to top, #66a3ff 0%, #b3d1ff 50%, #e6f2ff 100%);
   border: none;
   color: #333;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 6px;
+  padding:  8px 16px;
   border-radius: 10px;
+  box-shadow:
+   inset 0 2px 4px rgba(255, 255, 255, 0.8),
+   0 4px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
 .legend-button:hover {
-  background-color: #aacdee;
+  background: linear-gradient(to top, #4d94ff 0%, #99c2ff 50%, #f2f9ff 100%);
+  box-shadow:
+   inset 0 3px 6px rgba(255, 255, 255, 0.9),
+   0 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .legend-menu {
