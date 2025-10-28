@@ -15,7 +15,8 @@ import neighborhoods from './../data/Neighborhoods.json';
 import planningDistricts from './../data/PlanningDistricts.json';
 import "leaflet/dist/leaflet.css";
 import "./MyMap.css";
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
+import MapboxSearchBar from './MapboxSearchBar';
 import './MapStyles.css';
 import ChartPanel from './ChartPanel';
 import './../App';
@@ -620,7 +621,7 @@ class MyMap extends Component {
                     onEachFeature={this.onEachVoterDist}
                     />
                 )}
-                <SearchBar/>
+                <MapboxSearchBar/>
                 <ChartPanel
                         // parcel={this.state.selectedParcel}
                         parcel={this.props.selectedParcel}
