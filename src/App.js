@@ -41,12 +41,12 @@ const defaultWeights = {
 };
 
 function App() {
-
+  /* */
   const [geoData, setGeoData] = useState(null);
-  const [selectedParcel, setSelectedParcel] = React.useState(null); 
-  
-  const [isParcelOpen, setIsParcelOpen] = React.useState(false) 
-  
+  const [selectedParcel, setSelectedParcel] = React.useState(null); // Clear!
+
+  const [isParcelOpen, setIsParcelOpen] = React.useState(false) // Remove??
+
   const [parcelIndex, setParcelIndex] = useState(null);
 
   /* Added 10/30/25 */
@@ -54,20 +54,21 @@ function App() {
   /* */
 
   useEffect(() => {
-    fetch('/data/Parcels.json')
-    .then((res) => res.json())
-    .then((data) => {
-      setGeoData(data);
-
-      const index = {};
-        data.features.forEach((f) => {
-          const key = f.properties.Serial?.toString().trim().toLowerCase();
-          if (key) index[key] = f;
-        });
-        setParcelIndex(index);
+    // fetch('/data/Parcels.json')
+    fetch('https://storage.googleapis.com/land-prioritization-app-data/Parcels.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('HTTP error! status: ${res.status}');
+        }
+        return res.json();
       })
+      .then((data) => setGeoData(data))
       .catch((err) => console.error('Error loading GeoJSON:', err));
-  }, []);
+    }, []);
+  //   .then((res) => res.json())
+  //   .then((data) => setGeoData(data))
+  //   .catch((err) => console.error('Error loading GeoJSON:', err));
+  // }, []);
 
   const [weights, setWeights] = useState(defaultWeights);
   const [selectedType, setSelectedType] = useState('All');
