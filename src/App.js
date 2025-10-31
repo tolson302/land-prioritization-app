@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import MyMap from './components/MyMap';
 import WeightsWidget from './components/WeightsWidget';
 import OwnerTypeFilter from './components/OwnerTypeFilter';
-// import parcelData from './data/Parcels.json';
 import Header from './components/Header';
 import GroceryDistanceFilter from './components/GroceryDistanceFilter';
 import SchoolDistanceFilter from './components/SchoolDistanceFilter';
@@ -22,7 +21,10 @@ import Footer from './components/Footer';
 import './components/Footer.css';
 import './App.css';
 import ParcelInfo from './components/ParcelInfo';
-import VacantFilter from './components/VacantFilter'; // Remove?
+import VacantFilter from './components/VacantFilter';
+/* Added 10/30/25 */
+import ParcelSearch from './components/ParcelSearch';
+/* */
 
 const defaultWeights = {
   GROCERY: 10,
@@ -39,35 +41,39 @@ const defaultWeights = {
 };
 
 function App() {
-  /* */
+
   const [geoData, setGeoData] = useState(null);
-  const [selectedParcel, setSelectedParcel] = React.useState(null); // Clear!
-
-  const [isParcelOpen, setIsParcelOpen] = React.useState(false) // Remove??
-  useEffect(() => {
-    // fetch('/data/Parcels.json')
-    fetch('https://storage.googleapis.com/land-prioritization-app-data/Parcels.json')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('HTTP error! status: ${res.status}');
-        }
-        return res.json();
-      })
-      .then((data) => setGeoData(data))
-      .catch((err) => console.error('Error loading GeoJSON:', err));
-    }, []);
-  //   .then((res) => res.json())
-  //   .then((data) => setGeoData(data))
-  //   .catch((err) => console.error('Error loading GeoJSON:', err));
-  // }, []);
-
+  const [selectedParcel, setSelectedParcel] = React.useState(null); 
   
+  const [isParcelOpen, setIsParcelOpen] = React.useState(false) 
+  
+  const [parcelIndex, setParcelIndex] = useState(null);
+
+  /* Added 10/30/25 */
+  const [showParcelSearch, setShowParcelSearch] = useState(false);
   /* */
+
+  useEffect(() => {
+    fetch('/data/Parcels.json')
+    .then((res) => res.json())
+    .then((data) => {
+      setGeoData(data);
+
+      const index = {};
+        data.features.forEach((f) => {
+          const key = f.properties.Serial?.toString().trim().toLowerCase();
+          if (key) index[key] = f;
+        });
+        setParcelIndex(index);
+      })
+      .catch((err) => console.error('Error loading GeoJSON:', err));
+  }, []);
+
   const [weights, setWeights] = useState(defaultWeights);
   const [selectedType, setSelectedType] = useState('All');
-  /* */
+
   const [selectedVType, setSelectedVType] = useState('All');
-  /* */
+
   const [selectedZType, setSelectedZType] = useState('All');
   const [selectedSnyZType, setSelectedSnyZType] = useState('All');
 
@@ -116,10 +122,10 @@ function App() {
   const [selectedSeValue, setSelectedSeValue] = useState('All');
   const [selectedCoValue, setSelectedCoValue] = useState('All')
   const [selectedWuValue, setSelectedWuValue] = useState('All');
-  /* */
+  
   const [selectedBasemap, setSelectedBasemap] = useState('osm');
   const [selectedOverlays, setSelectedOverlays] = useState([]);
-  /* */
+  
   if (!geoData) return <div>Loading map data...</div>;
 
 const ownerTypes = Array.from(
@@ -129,7 +135,7 @@ const ownerTypes = Array.from(
       .filter(Boolean)
   )
 );
-/* */
+
 const vacantTypes = Array.from(
   new Set(
     geoData.features
@@ -137,7 +143,7 @@ const vacantTypes = Array.from(
       .filter(Boolean)
   )
 )
-/* */
+
 const zoningTypes = Array.from(
   new Set(geoData.features.map(f => f.properties?.ZONING).filter(Boolean))
 );
@@ -179,7 +185,7 @@ const zoningTypes = Array.from(
     setSelectedSeValue('All');
     setSelectedCoValue('All');
     setSelectedWuValue('All');
-    setSelectedVType('All'); // Remove?
+    setSelectedVType('All');
   };
 
 
@@ -192,6 +198,10 @@ const zoningTypes = Array.from(
         setSelectedBasemap={setSelectedBasemap}
         selectedOverlays={selectedOverlays}
         setSelectedOverlays={setSelectedOverlays}
+        /* Added 10/30/25 */
+        showParcelSearch={showParcelSearch}
+        setShowParcelSearch={setShowParcelSearch}
+        /* */
       />
 
       <div className="app-container">
@@ -220,14 +230,6 @@ const zoningTypes = Array.from(
             </div>
           )}
         </div>
-
-
-          {/* {isParcelOpen && (
-            <ParcelInfo
-              parcel={selectedParcel}
-              onClear={() => setSelectedParcel(null)}
-            />
-          )} */}
 
           <h3>Filters</h3>
           <OwnerTypeFilter
@@ -362,8 +364,7 @@ const zoningTypes = Array.from(
           <MyMap 
             
             geoData={geoData}
-            
-            onParcelClick={setSelectedParcel} selectedParcel={selectedParcel} // Remove?
+            onParcelClick={setSelectedParcel} selectedParcel={selectedParcel}
             weights={weights}
             selectedOwnerType={selectedType}
             selectedVType={selectedVType}
@@ -404,7 +405,9 @@ const zoningTypes = Array.from(
             selectedWuValue={selectedWuValue}
             selectedBasemap={selectedBasemap}
             selectedOverlays={selectedOverlays}
-          />
+          >
+            {showParcelSearch && <ParcelSearch parcelIndex={parcelIndex} />}
+          </MyMap>
         </div>
       </div>
       <Footer className="app-footer"/>

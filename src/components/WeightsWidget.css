@@ -1,33 +1,73 @@
-/* WeightsWidget.css */
-
-.weights-widget {
+/* Position the whole widget in the corner of the map */
+.weights-widget-container {
   position: absolute;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+}
+
+/* Widget box itself */
+.weights-widget {
   background-color: #4287C7;
-  padding: 1rem;
-  border: 1px solid #ccc;
+  color: white;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  padding: 0.5rem;
   width: 220px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 0.75rem
+  font-size: 0.75rem;
+}
+
+/* Header row: title + toggle button */
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.widget-header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Toggle button now inline */
+.toggle-button {
+  background: white;
+  color: #4287C7;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+  padding: 2px 6px;
+  transition: background 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Collapsible content area */
+.widget-body {
+  background-color: #f9f9f9;
+  color: #000;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.weight-input {
+  margin-bottom: 0.5rem;
 }
 
 .weight-input input[type="range"] {
-    width: 100%;
-    margin-top: 4px;
-    accent-color: #043E74;
-    font-size: 0.75rem;
+  width: 100%;
+  accent-color: #043E74;
 }
 
-.weight-input label {
-  margin-right: 8px;
-}
-
+/* Reset button at bottom */
 .reset-button {
-  margin-top: 10px;
+  margin-top: 8px;
   padding: 6px 12px;
   background-color: #fff;
   color: #4287C7;
@@ -37,39 +77,13 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   cursor: pointer;
   width: 100%;
-  transition: background 0.3s;
 }
 
 .reset-button:hover {
   background-color: #e0e0e0;
 }
 
-.toggle-button {
-    margin-bottom: 10px;
-    padding: 6px 12px;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.toggle-button:hover {
-    margin-bottom: 10px;
-    padding: 6px 12px;
-    font-size: 14px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;    
-}
-
-.weights-widget-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 4px;
+.widget-body {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
 }

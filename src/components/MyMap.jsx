@@ -15,13 +15,14 @@ import neighborhoods from './../data/Neighborhoods.json';
 import planningDistricts from './../data/PlanningDistricts.json';
 import "leaflet/dist/leaflet.css";
 import "./MyMap.css";
-// import SearchBar from './SearchBar';
 import MapboxSearchBar from './MapboxSearchBar';
+/* Added 10/30/25 */
+import ParcelSearch from './ParcelSearch';
+/* */
 import './MapStyles.css';
 import ChartPanel from './ChartPanel';
 import './../App';
 import ParcelInfo from './ParcelInfo';
-// import VacantFilter from './VacantFilter'; // Remove?
 
 const calculateOverallScore = (feature, weights) => {
     let scoreSum = 0;
@@ -67,7 +68,7 @@ class MyMap extends Component {
     onEachParcel = (parcel, layer) => {
     const score = calculateOverallScore(parcel, this.props.weights);
     layer.on('click', () => {
-        // this.setState({ selectedParcel: parcel });
+
         this.props.onParcelClick(parcel);
     });
     const popupContent = `
@@ -178,7 +179,6 @@ class MyMap extends Component {
         });
     };
 
-    /* */
     onEachCDP = (feature, layer) => {
         const cdpName = (feature.properties.LABEL);
         layer.bindTooltip(cdpName, {
@@ -187,7 +187,6 @@ class MyMap extends Component {
             className: 'cdp-label'
         });
     };
-    /* */
 
     onEachNeighborhood = (feature, layer) => {
         const neighborhoodName = (feature.properties.Name_);
@@ -210,8 +209,9 @@ class MyMap extends Component {
     render() {
 
         const {
-            geoData, // Remove?
-            selectedVType, // Remove?
+            geoData,
+            children,
+            selectedVType, 
             selectedOwnerType,
             selectedGrWalkTime,
             selectedGrBikeTime,
@@ -254,13 +254,14 @@ class MyMap extends Component {
 
         let filteredFeatures = geoData.features.filter(feature => {
         const props = feature.properties || {};
-        /* */
+
+        /* This keeps throwing a warning */
         const { geoData } = this.props;
         /* */
-/* Remove? */
+
         const matchVacant =
             selectedVType === 'All' || props.VACANT === selectedVType;
-/* */
+
         const matchOwner =
             selectedOwnerType === 'All' || props.OwnerType === selectedOwnerType;
 
@@ -403,7 +404,7 @@ class MyMap extends Component {
             (props.WUI && props.WUI === selectedWuValue)
 
         return (
-            matchVacant && // Remove?
+            matchVacant &&
             matchOwner && 
             matchesWalk && 
             matchesBike && 
@@ -622,13 +623,12 @@ class MyMap extends Component {
                     />
                 )}
                 <MapboxSearchBar/>
+                {/* showParcelSearch && <ParcelSearch parcelIndex={parcelIndex}> */}
                 <ChartPanel
-                        // parcel={this.state.selectedParcel}
                         parcel={this.props.selectedParcel}
                         onClose={() => this.props.onParcelClick(null)}
-                        // onClose={() => this.setState({ selectedParcel: null })}
                     />
-                
+                {children}
                 </MapContainer>
             </div>
         );

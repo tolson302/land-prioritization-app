@@ -244,4 +244,23 @@
   color: #333;
 }
 
+.search-toggle-container {
+  position: relative;
+  display: inline-block;
+}
 
+.search-toggle-button {
+  background: #b9d6f1;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.search-toggle-button:hover {
+  background-color: #aacdee;
+}

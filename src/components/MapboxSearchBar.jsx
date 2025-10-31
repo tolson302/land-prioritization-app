@@ -1,5 +1,3 @@
-/* MapboxSearchBar.jsx */
-
 import React, { useState } from "react";
 import { useMap, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -59,40 +57,38 @@ export default function MapboxSearchBar() {
     setQuery(feature.place_name);
   };
 
-  return (
-    <form onSubmit={searchMapbox} className="search-bar-container">
+   return (
+    <>
+      <form onSubmit={(e) => e.preventDefault()} className="search-bar-container">
         <input
-            type="text"
-            value={query}
-            onChange={handleInputChange}
-            placeholder="Search for address..."
-            className="search-input-style"
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          placeholder="Search for address..."
+          className="search-input-style"
         />
         <button type="submit" className="search-button-style">Search</button>
+
         {results.length > 0 && (
-            <ul className="search-results">
-                {results.map((feature) => (
-                    <li
-                        key={feature.id}
-                        onClick={() => handleResultClick(feature)}
-                        className="results-style"
-                        >
-                            {feature.place_name}
-                    </li>
-                ))}
-            </ul>
+          <ul className="search-results">
+            {results.map((feature) => (
+              <li
+                key={feature.id}
+                onClick={() => handleResultClick(feature)}
+                className="results-style"
+              >
+                {feature.place_name}
+              </li>
+            ))}
+          </ul>
         )}
-    </form>
+      </form>
 
+      {selectedPosition && (
+        <Marker position={selectedPosition} icon={customIcon}>
+          <Popup>{query}</Popup>
+        </Marker>
+      )}
+    </>
   );
-};
-
-//       {/* Marker for selected location */}
-//       {selectedPosition && (
-//         <Marker position={selectedPosition} icon={customIcon}>
-//           <Popup>{query}</Popup>
-//         </Marker>
-//       )}
-//     </>
-//   );
-// }
+}
