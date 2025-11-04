@@ -1,0 +1,158 @@
+/* NeighborhoodModal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 0px;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Modal header styling */
+.modal-header {
+  width: 100%;
+  background: linear-gradient(to top, #4287C7, #7FDBFF);
+  color: white;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: flex-start; 
+  padding: 4px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; 
+}
+/* */
+
+.close-btn {
+  color: #333;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border: #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #fff;
+    border: #333;
+    background: #ff0000;
+    font-weight: bold;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.info-table td, .info-table th {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-table th {
+    background-color: #cee0f0;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Icon/value/label layout */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px; 
+}
+
+.stat-icon {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #333;
+}
+/* */
+
+/* Bottom buttons styling */
+.modal-bottom-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px 20px;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.return-top-btn,
+.close-btn-bottom {
+  background-color: #ddd;
+  color: #333;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+  transition: background-color 0.2s ease;
+}
+
+.return-top-btn:hover {
+    border: #333;
+    background: #ccc;
+    font-weight: bold;
+}
+
+.close-btn-bottom:hover {
+    color: #fff;
+    border: #333;
+    background: #ff0000;
+    font-weight: bold;
+}
+
+.modal-footer {
+  font-size: 0.85em;
+  color: #555;
+  padding: 10px 20px;
+  background: linear-gradient(to top, #ccc, #f7f7f7);
+  border-top: 1px solid #ccc;
+}
+/* */

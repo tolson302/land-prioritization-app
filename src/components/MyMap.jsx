@@ -23,6 +23,9 @@ import './MapStyles.css';
 import ChartPanel from './ChartPanel';
 import './../App';
 import ParcelInfo from './ParcelInfo';
+/* Added 11/4/2025 */
+import NeighborhoodModal from './NeighborhoodModal';
+/* */
 
 const calculateOverallScore = (feature, weights) => {
     let scoreSum = 0;
@@ -45,6 +48,11 @@ const calculateOverallScore = (feature, weights) => {
 class MyMap extends Component {
     constructor(props) {
         super(props);
+        /* Added 11/4/2025 */
+        this.state = {
+            selectedNeighborhood: null,
+        };
+        /* */
     }
     
     parcelStyle = (score) => {
@@ -188,14 +196,30 @@ class MyMap extends Component {
         });
     };
 
+    /*
     onEachNeighborhood = (feature, layer) => {
-        const neighborhoodName = (feature.properties.Name_);
+        const neighborhoodName = (feature.properties.NAME);
         layer.bindTooltip(neighborhoodName, {
             permanent: true,
             direction: 'center',
             className: 'neighborhood-label'
         });
     };
+    */
+   
+    /* Added 11/4/2025 */
+    onEachNeighborhood = (feature, layer) => {
+        layer.on({
+            click: () => {
+                this.setState({ selectedNeighborhood: feature.properties });
+            },
+        });
+    };
+
+    closeModal = () => {
+        this.setState({ selectedNeighborhood: null });
+    };
+    /* */
 
     onEachPlanningDistrict = (feature, layer) => {
         const planningDistrictName = (feature.properties.SITE_NAME);
@@ -630,6 +654,14 @@ class MyMap extends Component {
                     />
                 {children}
                 </MapContainer>
+
+                {/* Added 11/4/2025 */}
+                {this.state.selectedNeighborhood && (
+                    <NeighborhoodModal
+                        data={this.state.selectedNeighborhood}
+                        onClose={this.closeModal}
+                    />
+                )}
             </div>
         );
     }
