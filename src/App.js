@@ -54,21 +54,28 @@ function App() {
   /* */
 
   useEffect(() => {
-    // fetch('/data/Parcels.json')
-    fetch('https://storage.googleapis.com/land-prioritization-app-data/Parcels.json')
+    fetch("https://storage.googleapis.com/land-prioritization-app-data/Parcels.json")
       .then((res) => {
         if (!res.ok) {
-          throw new Error('HTTP error! status: ${res.status}');
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json();
       })
-      .then((data) => setGeoData(data))
-      .catch((err) => console.error('Error loading GeoJSON:', err));
-    }, []);
-  //   .then((res) => res.json())
-  //   .then((data) => setGeoData(data))
-  //   .catch((err) => console.error('Error loading GeoJSON:', err));
-  // }, []);
+      .then((data) => {
+        setGeoData(data);
+
+        // Build an index for fast parcel lookup
+        const index = {};
+        data.features.forEach((feature) => {
+          const parcelNumber = feature.properties.Serial || feature.properties.Serial;
+          if (parcelNumber) {
+            index[parcelNumber.toString().toLowerCase()] = feature;
+          }
+        });
+        setParcelIndex(index);
+      })
+      .catch((err) => console.error("Error loading GeoJSON:", err));
+  }, []);
 
   const [weights, setWeights] = useState(defaultWeights);
   const [selectedType, setSelectedType] = useState('All');
@@ -407,7 +414,11 @@ const zoningTypes = Array.from(
             selectedBasemap={selectedBasemap}
             selectedOverlays={selectedOverlays}
           >
-            {showParcelSearch && <ParcelSearch parcelIndex={parcelIndex} />}
+            {showParcelSearch && parcelIndex && (
+              <ParcelSearch 
+                parcelIndex={parcelIndex} 
+              />
+            )}
           </MyMap>
         </div>
       </div>
