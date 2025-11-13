@@ -1,8 +1,10 @@
 /* LibraryDistanceFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './GroceryDistanceFilter.css'
 
+// Define consts
 const LiTimeOptions = [
     '0 - 5 min',
     '5 - 10 min',
@@ -70,6 +72,7 @@ const Dropdown = ({ label, selectedLiValues, setSelectedLiValues }) => {
     }) => {
         const [isParentOpen, setIsParentOpen] = useState(false);
     
+        // Return and export
         return (
             <div className="grocery-filter">
                 <button className="gr-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

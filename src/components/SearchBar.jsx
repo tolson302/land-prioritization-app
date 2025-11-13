@@ -1,10 +1,12 @@
 /* SearchBar.jsx */
 
+// Imports
 import React, { useState, useRef } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import './SearchBar.css';
 
+// Define consts
 const SearchBar = () => {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -28,7 +30,7 @@ const SearchBar = () => {
         }
 
         const encodedQuery = encodeURIComponent(input);
-        const bbox = '-114.0522,36.9979,-109.0416,42.0016'; // Utah BBOX
+        const bbox = '-114.0522,36.9979,-109.0416,42.0016'; // Utah bounding box
         const url = `https://photon.komoot.io/api/?q=${encodedQuery}&limit=5&bbox=${bbox}`;
 
         try {
@@ -86,6 +88,7 @@ const SearchBar = () => {
         setSuggestions([]);
     };
 
+    // Return and export
     return (
         <form onSubmit={handleSubmit} className="search-submit-style">
         <input
@@ -110,6 +113,7 @@ const SearchBar = () => {
             </ul>
         )}
     </form>
+
 
         );
     };

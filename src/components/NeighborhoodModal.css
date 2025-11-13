@@ -23,7 +23,6 @@
   position: relative;
 }
 
-/* Modal header styling */
 .modal-header {
   width: 100%;
   background: linear-gradient(to top, #4287C7, #7FDBFF);
@@ -36,7 +35,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative; 
 }
-/* */
 
 .close-btn {
   color: #333;
@@ -78,7 +76,6 @@
     font-size: 1rem;
 }
 
-/* Icon/value/label layout */
 .stats-container {
   display: flex;
   justify-content: space-around;
@@ -110,9 +107,7 @@
   font-size: 0.9em;
   color: #333;
 }
-/* */
 
-/* Bottom buttons styling */
 .modal-bottom-buttons {
   display: flex;
   justify-content: flex-end;
@@ -155,4 +150,3 @@
   background: linear-gradient(to top, #ccc, #f7f7f7);
   border-top: 1px solid #ccc;
 }
-/* */

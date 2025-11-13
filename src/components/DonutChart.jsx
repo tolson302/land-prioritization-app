@@ -1,11 +1,13 @@
 /* DonutChart.jsx */
 
-import React from 'react';
+// Imports
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
+// Register components needed for donut chart
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+// Define consts
 const DonutChart = ({ labels, values }) => {
   const data = {
     labels,
@@ -40,6 +42,7 @@ const DonutChart = ({ labels, values }) => {
     },
   };
 
+  // Return and export
   return (
     <div style={{ width: '200px', height: '200px' }}>
       <Doughnut data={data} options={options} />

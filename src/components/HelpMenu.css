@@ -1,0 +1,68 @@
+/* HelpMenu.css */
+
+.help-menu-container {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.help-menu {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    width: 500px;
+    max-width: 90%;
+    position: relative;
+}
+
+.help-close-btn {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    background-color: #ccc;
+    color: #333;
+}
+
+.help-close-btn:hover {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.slide-title {
+    font-size: 1.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.help-text {
+    font-size: 0.9rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #333;
+    text-align: left;
+}
+
+.pg-numbers {
+    font-size: 0.75rem;
+    color: #ccc;
+    text-align: center;
+}
+
+.help-header {
+    width: 100%;
+    background: linear-gradient(to top, #4287C7, #7FDBFF);
+    color: white;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 4px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}

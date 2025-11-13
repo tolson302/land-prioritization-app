@@ -1,6 +1,8 @@
 /* App.js */
 
+// Imports
 import React, { useState, useEffect } from 'react';
+// Components
 import MyMap from './components/MyMap';
 import WeightsWidget from './components/WeightsWidget';
 import OwnerTypeFilter from './components/OwnerTypeFilter';
@@ -18,14 +20,15 @@ import ParkDistanceFilter from './components/ParkDistanceFilter';
 import ZoningFilter from './components/ZoningFilter';
 import SpecialRestrictionsFilter from './components/SpecialRestrictionsFilter';
 import Footer from './components/Footer';
-import './components/Footer.css';
-import './App.css';
 import ParcelInfo from './components/ParcelInfo';
 import VacantFilter from './components/VacantFilter';
-/* Added 10/30/25 */
 import ParcelSearch from './components/ParcelSearch';
-/* */
+import HelpMenu from './components/HelpMenu';
+// Styling
+import './components/Footer.css';
+import './App.css';
 
+// Define default weights
 const defaultWeights = {
   GROCERY: 10,
   SCHOOL: 10,
@@ -40,19 +43,21 @@ const defaultWeights = {
   DEVELOP: 10
 };
 
+// Define function and consts
 function App() {
-  /* */
+  
   const [geoData, setGeoData] = useState(null);
-  const [selectedParcel, setSelectedParcel] = React.useState(null); // Clear!
+  const [selectedParcel, setSelectedParcel] = React.useState(null);
 
-  const [isParcelOpen, setIsParcelOpen] = React.useState(false) // Remove??
+  const [isParcelOpen, setIsParcelOpen] = React.useState(false)
 
   const [parcelIndex, setParcelIndex] = useState(null);
 
-  /* Added 10/30/25 */
   const [showParcelSearch, setShowParcelSearch] = useState(false);
-  /* */
 
+  const [showHelpMenu, setShowHelpMenu] = useState(false);
+
+  // Fetch parcels layer from Google Cloud Storage
   useEffect(() => {
     fetch("https://storage.googleapis.com/land-prioritization-app-data/Parcels.json")
       .then((res) => {
@@ -64,7 +69,7 @@ function App() {
       .then((data) => {
         setGeoData(data);
 
-        // Build an index for fast parcel lookup
+        // Build an index for quick parcel lookup
         const index = {};
         data.features.forEach((feature) => {
           const parcelNumber = feature.properties.Serial || feature.properties.Serial;
@@ -77,6 +82,7 @@ function App() {
       .catch((err) => console.error("Error loading GeoJSON:", err));
   }, []);
 
+  // Consts for map filters and weights
   const [weights, setWeights] = useState(defaultWeights);
   const [selectedType, setSelectedType] = useState('All');
 
@@ -152,10 +158,11 @@ const vacantTypes = Array.from(
   )
 )
 
-const zoningTypes = Array.from(
-  new Set(geoData.features.map(f => f.properties?.ZONING).filter(Boolean))
-);
+// const zoningTypes = Array.from(
+//   new Set(geoData.features.map(f => f.properties?.ZONING).filter(Boolean))
+// );
 
+// Const for clearing map filters
   const handleClearFilters = () => {
     setSelectedType('All');
     setSelectedGrWalkTime([]);
@@ -196,20 +203,22 @@ const zoningTypes = Array.from(
     setSelectedVType('All');
   };
 
-
-
-
+  // Return and export
   return (
     <div className="app-wrapper">
       <Header
+        /* Basemaps */
         selectedBasemap={selectedBasemap}
         setSelectedBasemap={setSelectedBasemap}
+        /* Overlay layers */
         selectedOverlays={selectedOverlays}
         setSelectedOverlays={setSelectedOverlays}
-        /* Added 10/30/25 */
+        /* Parcel search */
         showParcelSearch={showParcelSearch}
         setShowParcelSearch={setShowParcelSearch}
-        /* */
+        /* Help menu */
+        showHelpMenu={showHelpMenu}
+        setShowHelpMenu={setShowHelpMenu}
       />
 
       <div className="app-container">
@@ -239,6 +248,7 @@ const zoningTypes = Array.from(
           )}
         </div>
 
+          {/* Map filters */}
           <h3>Filters</h3>
           <OwnerTypeFilter
             selectedType={selectedType}
@@ -414,11 +424,8 @@ const zoningTypes = Array.from(
             selectedBasemap={selectedBasemap}
             selectedOverlays={selectedOverlays}
           >
-            {showParcelSearch && parcelIndex && (
-              <ParcelSearch 
-                parcelIndex={parcelIndex} 
-              />
-            )}
+            {showParcelSearch && <ParcelSearch parcelIndex={parcelIndex} />}
+            <HelpMenu isOpen={showHelpMenu} onClose={() => setShowHelpMenu(false)}/>
           </MyMap>
         </div>
       </div>

@@ -1,8 +1,10 @@
 /* VacantFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './OwnerTypeFilter.css';
 
+// Define consts
 const VacantFilter = ({ selectedVType, setSelectedVType, vacantTypes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,6 +12,7 @@ const VacantFilter = ({ selectedVType, setSelectedVType, vacantTypes }) => {
     setIsOpen(!isOpen);
   };
 
+  // Return and export
   return (
     <div className="owner-type-filter">
       <button className="dropdown-toggle" onClick={toggleDropdown}>

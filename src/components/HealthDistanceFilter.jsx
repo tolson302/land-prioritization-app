@@ -1,8 +1,10 @@
 /* HealthDistanceFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './HealthDistanceFilter.css';
 
+// Define consts
 const HealthTimeOptions = [
     '0 - 5 min',
     '5 - 10 min',
@@ -70,6 +72,7 @@ const Dropdown = ({ label, selectedHeValues, setSelectedHeValues }) => {
     }) => {
         const [isParentOpen, setIsParentOpen] = useState(false);
     
+        // Return and export
         return (
             <div className="grocery-filter">
                 <button className="gr-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

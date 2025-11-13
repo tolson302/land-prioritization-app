@@ -1,3 +1,5 @@
+/* WeightsWidget.css */
+
 /* Position the whole widget in the corner of the map */
 .weights-widget-container {
   position: absolute;
@@ -18,7 +20,7 @@
   font-size: 0.75rem;
 }
 
-/* Header row: title + toggle button */
+/* Header row: title and toggle button */
 .widget-header {
   display: flex;
   justify-content: space-between;
@@ -31,7 +33,7 @@
   font-size: 0.9rem;
 }
 
-/* Toggle button now inline */
+/* Toggle button inline */
 .toggle-button {
   background: white;
   color: #4287C7;

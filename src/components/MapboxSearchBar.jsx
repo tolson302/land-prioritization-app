@@ -1,3 +1,6 @@
+/* MapboxSearchBar.jsx */
+
+// Imports
 import React, { useState } from "react";
 import { useMap, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
@@ -5,6 +8,7 @@ import customMarker from "../assets/pointer.svg"
 import debounce from "lodash.debounce";
 import "./MapboxSearchBar.css";
 
+// Define consts
 const MAPBOX_TOKEN = "pk.eyJ1IjoidG9sc29uMzAyIiwiYSI6ImNtaDUxNTI2ZDAxMTYybHBta3pqbTRianMifQ.-8SjGq6UD7KB2-4Pgfnf7g";
 
 const customIcon = L.icon({
@@ -14,6 +18,7 @@ const customIcon = L.icon({
     popupAnchor: [0, -40],
 });
 
+// Return and export
 export default function MapboxSearchBar() {
   const map = useMap();
   const [query, setQuery] = useState("");

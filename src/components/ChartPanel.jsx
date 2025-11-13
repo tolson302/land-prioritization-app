@@ -1,24 +1,25 @@
 /* ChartPanel.jsx */
 
-import React, { useState, useEffect } from 'react';
-// import DonutChart from './DonutChart';
-import BarChart from './BarChart';
-import './ChartPanel.css';
-import expandIcon from './../data/ExpandWindow.png';
-import minimizeIcon from './../data/MinimizeIcon.svg';
+// Imports
+import { useState, useEffect } from 'react';
+import BarChart from "./BarChart";
+import "./ChartPanel.css";
 
-const ChartPanel = ({ parcel, onClose }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+// Define consts
+const ChartPanel = ({ parcel }) => {
+
+  const [showPanel, setShowPanel] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    setIsExpanded(false);
+    if (parcel) setShowPanel(true);
   }, [parcel]);
 
-  if (!parcel) return null;
+  const props = parcel?.properties || {};
 
-  const props = parcel.properties;
+  const labels = ['Grocery', 'School', 'Library', 'Healthcare', 'Culture', 
+    'Recreation', 'Bus Stop', 'Gas Station', 'Employment Hub', 'Park'];
 
-  const labels = ['Grocery', 'School', 'Library', 'Healthcare', 'Culture', 'Recreation', 'Bus Stop', 'Gas Station', 'Employment Hub', 'Park'];
   const values = [
     props.GROCERY_SCORE,
     props.SCHOOL_SCORE,
@@ -32,36 +33,38 @@ const ChartPanel = ({ parcel, onClose }) => {
     props.PARK_SCORE,
   ];
 
+  // Return and export
   return (
-    <div className={`chart-panel ${isExpanded ? 'expanded' : ''}`}>
-      {/* Top-right controls */}
-      <div className="panel-controls">
-        <button
-          className="panel-button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          title={isExpanded ? 'Restore' : 'Expand'}
-        >
-          <img
-            src={isExpanded ? minimizeIcon : expandIcon}
-            alt={isExpanded ? 'Restore' : 'Expand'}
-          />
-        </button>
-        <button
-          className="panel-button close-button"
-          onClick={onClose}
-          title="Close"
-        >
-          ×
-        </button>
-      </div>
+    <div className="chart-container">
+      {/* Minimized Chart View */}
+      {showPanel && (
+        <div className="chart-mini">
+          <button onClick={() => setShowModal(true)} className="view-modal-btn">
+            View Full Chart
+          </button>
+          <button onClick={() => setShowPanel(false)} className="close-btn">
+            Close ✖
+          </button>
 
-      {/* Panel content */}
-      <h4>Accessibility Score Chart</h4>
-      <h6>Score 1-10 (10 being best)</h6>
-      <p><strong>Parcel ID:</strong> {props.Serial}</p>
-      <BarChart labels={labels} values={values} />
+          <h4>Accessibility Score Chart</h4>
+          <p><strong>Parcel ID: </strong>{props.Serial}</p>
+          <BarChart labels={labels} values={values}/>
+        </div>
+      )}
+
+      {/* Modal Chart View */}
+      {showModal && (
+        <div className="chart-modal">
+          <div className="chart-modal-content">
+            <button className="close-modal-btn" onClick={() => setShowModal(false)}>Close ✖</button>
+            <h2>Accessibility Score Chart</h2>
+            <p><strong>Parcel ID: </strong>{props.Serial}</p>
+            <BarChart labels={labels} values={values}/>
+          </div>
+        </div>  
+      )}
     </div>
   );
 };
 
-export default ChartPanel;
+export default ChartPanel

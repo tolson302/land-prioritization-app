@@ -6,7 +6,7 @@
     padding: 1rem;
     text-align: center;
     border-top: 1px solid #ddd;
-    position: static; /* Change back to 'relative' if it doesn't work */
+    position: static;
     bottom: 0;
     width: 100%;
     font-size: 0.9rem;

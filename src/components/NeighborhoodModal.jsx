@@ -11,17 +11,17 @@ import {
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import "./NeighborhoodModal.css";
-/* Import icons in modal */
+// Import icons in modal
 import age from "../assets/median-age.png";
 import income from "../assets/median-income.png";
 import edu from "../assets/education.png";
-/* */
-/* Add labels to donut chart */
+// Add labels to donut chart
 import ChartDataLabels from "chartjs-plugin-datalabels";
-/* */
 
+// Register components needed for donut chart
 ChartJS.register(ArcElement, Title, Tooltip, Legend, ChartDataLabels);
 
+// Define consts
 const NeighborhoodModal = ({ data, onClose }) => {
   const chartData = {
     labels: ["Owner Occupied","Renter Occupied"],
@@ -34,7 +34,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
     ],
   };
 
-/* Define chart options */
+
  const chartOptions = {
     cutout: "60%",
     plugins: {
@@ -60,20 +60,19 @@ const NeighborhoodModal = ({ data, onClose }) => {
       },
     },
   };
-/* */
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
 
-        {/* Header and close button */}
+        {/* Modal header and close button */}
         <div className="modal-header">
             <h2>{data.NAME}</h2>
             <p><i>Neighborhood Overview</i></p>
             <button className="close-btn" onClick={onClose}>Close X</button>
         </div>
 
-        {/* Example Table */}
+        {/* Info table */}
         <table className="info-table">
           <tbody>
             <tr><td><strong>Area</strong></td><td>{data.AREA} mi²</td></tr>
@@ -83,7 +82,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           </tbody>
         </table>
 
-        {/* Icon/value/label layout */}
+        {/* Quick stats layout */}
         <div className="stats-container">
             <div className="stat-item">
                 <img src={age} alt="Median Age" className="stat-icon" />
@@ -107,9 +106,8 @@ const NeighborhoodModal = ({ data, onClose }) => {
                 <div className="stat-label">College Degree (2+ years)</div>
             </div>
         </div>
-        {/* */}
 
-        {/* Housing and Wealth Table */}
+        {/* Housing and wealth table */}
         <table className="info-table">
           <tbody>
             <tr><th colSpan="2">Housing & Wealth</th></tr>
@@ -128,7 +126,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           </tbody>
         </table>
 
-        {/* Population Table */}
+        {/* Population table */}
         <table className="info-table">
           <tbody>
             <tr><th colSpan="2">Population Data</th></tr>
@@ -140,7 +138,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           </tbody>
         </table>
 
-        {/* Indices Table */}
+        {/* Indices table */}
         <table className="info-table">
           <tbody>
             <tr><th colSpan="2">Indices</th></tr>
@@ -156,7 +154,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           </tbody>
         </table>
 
-        {/* Cost of Living Table */}
+        {/* Cost of living table */}
         <table className="info-table">
           <tbody>
             <tr><th colSpan="2">Cost of Living</th></tr>
@@ -173,7 +171,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           </tbody>
         </table>
 
-        {/* Own vs Rent Chart */}
+        {/* Own vs rent chart */}
         <div style={{ height: "300px", width: "60%" }}>
           <Doughnut 
             data={chartData} 
@@ -181,7 +179,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
           />
         </div>
 
-        {/* Language Table */}
+        {/* Language table */}
         <table className="info-table">
           <tbody>
             <tr><th colSpan="2">Population by Language</th></tr>

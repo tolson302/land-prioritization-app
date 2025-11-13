@@ -1,7 +1,6 @@
 /* MapStyles.css */
 
-/* Layers control styling */
-
+/* Styling for layers control and map pop-ups */
 .leaflet-control-layers {
     background-color: white;
     padding: 4px;

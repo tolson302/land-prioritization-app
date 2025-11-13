@@ -1,7 +1,12 @@
 /* LayersControlPanel.jsx */
+
+// Imports
 import React from 'react';
 import './Header.css'
 
+// Define consts
+
+// Basemaps
 const basemaps = [
   { name: 'OpenStreetMap', id: 'osm' },
   { name: 'Esri Imagery', id: 'esri' },
@@ -9,6 +14,7 @@ const basemaps = [
   { name: 'Dark Gray Canvas', id: 'dark' }
 ];
 
+// Overlay layers
 const overlays = [
   'Cities',
   'CDPs',
@@ -36,6 +42,7 @@ const LayerControlPanel = ({
     );
   };
 
+  // Return and export
   return (
     <div className="layers-menu show">
   <h4 style={{ color: 'black', fontSize: '14px' }}>Basemaps</h4>

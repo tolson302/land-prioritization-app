@@ -1,8 +1,16 @@
 /* MyMap.jsx */
 
+// Imports
 import React, { Component } from 'react';
 import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
-// import mapData from './../data/Parcels.json';
+import './../App';
+// Map components
+import MapboxSearchBar from './MapboxSearchBar';
+import ChartPanel from './ChartPanel';
+import ParcelInfo from './ParcelInfo';
+import NeighborhoodModal from './NeighborhoodModal';
+import SplashScreen from './SplashScreen';
+// Map layers
 import cities from './../data/Cities.json';
 import schoolDistricts from './../data/SchoolDistricts.json';
 import basinRec from './../data/BasinRec.json';
@@ -13,20 +21,12 @@ import voterPrecincts from './../data/VoterPrecincts.json';
 import cdp from './../data/CDPs.json';
 import neighborhoods from './../data/Neighborhoods.json';
 import planningDistricts from './../data/PlanningDistricts.json';
+// Styling
 import "leaflet/dist/leaflet.css";
 import "./MyMap.css";
-import MapboxSearchBar from './MapboxSearchBar';
-/* Added 10/30/25 */
-import ParcelSearch from './ParcelSearch';
-/* */
 import './MapStyles.css';
-import ChartPanel from './ChartPanel';
-import './../App';
-import ParcelInfo from './ParcelInfo';
-/* Added 11/4/2025 */
-import NeighborhoodModal from './NeighborhoodModal';
-/* */
 
+// Define consts
 const calculateOverallScore = (feature, weights) => {
     let scoreSum = 0;
     let weightSum = 0;
@@ -45,16 +45,17 @@ const calculateOverallScore = (feature, weights) => {
     return weightSum > 0 ? parseFloat((scoreSum / weightSum).toFixed(2)) : null;
 };
 
+// Create MyMap class
 class MyMap extends Component {
     constructor(props) {
         super(props);
-        /* Added 11/4/2025 */
+
         this.state = {
             selectedNeighborhood: null,
         };
-        /* */
     }
     
+    // Parcels layer styling
     parcelStyle = (score) => {
         if (score >= 7) return '#22A12F';
         if (score >= 6) return '#9AD17E';
@@ -91,6 +92,7 @@ class MyMap extends Component {
     layer.bindPopup(popupContent);
 };
 
+    // School districts layer styling
     getSchDistStyle = (feature) => {
         const districtName = feature.properties.NAME;
         let fillColor;
@@ -118,6 +120,7 @@ class MyMap extends Component {
         };
     };
 
+    // Planning districts layer styling
     getPlDistStyle = (feature) => {
         const planningDistrictName = feature.properties.SITE_NAME;
         let fillColor;
@@ -142,6 +145,16 @@ class MyMap extends Component {
         };
     };
 
+    onEachPlanningDistrict = (feature, layer) => {
+        const planningDistrictName = (feature.properties.SITE_NAME);
+        layer.bindTooltip(planningDistrictName, {
+            permanent: true,
+            direction: 'center',
+            className: 'planning-district-label'
+        });
+    };
+
+    // Cities layer styling
     onEachCity = (feature, layer) => {
         const cityName = String(feature.properties.NAME);
         layer.bindTooltip(cityName, {
@@ -151,6 +164,7 @@ class MyMap extends Component {
          });
     };
 
+    // Sewersheds layer styling
     onEachSewer = (feature, layer) => {
         const sewerName = String(feature.properties.msd_shrtnm);
         layer.bindTooltip(sewerName, {
@@ -160,6 +174,7 @@ class MyMap extends Component {
          });
     };
     
+    // Senate districts layer styling
     onEachSenateDist = (feature, layer) => {
         const senateDistName = String(feature.properties.DIST);
         layer.bindTooltip(senateDistName, {
@@ -169,6 +184,7 @@ class MyMap extends Component {
         });
     };
 
+    // House districts styling
     onEachHouseDist = (feature, layer) => {
         const houseDistName = String(feature.properties.DIST);
         layer.bindTooltip(houseDistName, {
@@ -178,6 +194,7 @@ class MyMap extends Component {
         });
     };
 
+    // Voter precincts layer styling
     onEachVoterDist = (feature, layer) => {
         const voterDistName = (feature.properties.VistaID);
         layer.bindTooltip(voterDistName, {
@@ -187,6 +204,7 @@ class MyMap extends Component {
         });
     };
 
+    // CDPs layer styling
     onEachCDP = (feature, layer) => {
         const cdpName = (feature.properties.LABEL);
         layer.bindTooltip(cdpName, {
@@ -196,19 +214,14 @@ class MyMap extends Component {
         });
     };
 
-    /*
+    // Neighborhoods layer styling
     onEachNeighborhood = (feature, layer) => {
         const neighborhoodName = (feature.properties.NAME);
         layer.bindTooltip(neighborhoodName, {
             permanent: true,
-            direction: 'center',
-            className: 'neighborhood-label'
+            direction:'center',
+            className: "neighborhood-label"
         });
-    };
-    */
-   
-    /* Added 11/4/2025 */
-    onEachNeighborhood = (feature, layer) => {
         layer.on({
             click: () => {
                 this.setState({ selectedNeighborhood: feature.properties });
@@ -221,15 +234,8 @@ class MyMap extends Component {
     };
     /* */
 
-    onEachPlanningDistrict = (feature, layer) => {
-        const planningDistrictName = (feature.properties.SITE_NAME);
-        layer.bindTooltip(planningDistrictName, {
-            permanent: true,
-            direction: 'center',
-            className: 'planning-district-label'
-        });
-    };
     
+    // Render components
     render() {
 
         const {
@@ -279,7 +285,7 @@ class MyMap extends Component {
         let filteredFeatures = geoData.features.filter(feature => {
         const props = feature.properties || {};
 
-        /* This keeps throwing a warning */
+        /* This is defined, but never used. Remove? */
         const { geoData } = this.props;
         /* */
 
@@ -471,14 +477,17 @@ class MyMap extends Component {
         console.log("Selected Owner Type:", selectedOwnerType);
         console.log("Filtered features count:", filteredFeatures.length);
 
+        // Return and export
         return (
             <div className="map-container">
                 <ParcelInfo/>
+                <SplashScreen/>
                 <MapContainer 
                     className="map-container" 
                     style={{ height: '100%', width: '100%' }}
                     zoom={12} 
                     center={[40.7, -111.5]}>
+                        {/* Parcels layer */}
                     <GeoJSON 
                         key={JSON.stringify(this.props.weights) + selectedVType + selectedOwnerType + 
                             selectedGrWalkTime.join(',') +
@@ -516,6 +525,7 @@ class MyMap extends Component {
                         data={filteredFeatures} 
                         onEachFeature={this.onEachParcel}
                     />
+                    {/* Basemap layers */}
                     {selectedBasemap === 'osm' && (
                     <TileLayer
                         attribution='&copy; OpenStreetMap contributors'
@@ -647,7 +657,6 @@ class MyMap extends Component {
                     />
                 )}
                 <MapboxSearchBar/>
-                {/* showParcelSearch && <ParcelSearch parcelIndex={parcelIndex}> */}
                 <ChartPanel
                         parcel={this.props.selectedParcel}
                         onClose={() => this.props.onParcelClick(null)}
@@ -655,7 +664,7 @@ class MyMap extends Component {
                 {children}
                 </MapContainer>
 
-                {/* Added 11/4/2025 */}
+                {/* Neighborhood pop-ups */}
                 {this.state.selectedNeighborhood && (
                     <NeighborhoodModal
                         data={this.state.selectedNeighborhood}

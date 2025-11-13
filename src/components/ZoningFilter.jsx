@@ -1,8 +1,10 @@
 /* ZoningFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './ZoningFilter.css';
 
+// Define consts
 const Dropdown = ({ label, selectedZType, setSelectedZType, zoningTypes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +56,7 @@ const ZoningFilter = ({
 }) => {
   const [isParentOpen, setIsParentOpen] = useState(false);
 
-  // Example zoning type lists (replace with your real ones)
+  // Eastern Summit zoning types
   const easternSummitZoningTypes = [
     'AG/Grazing -  5',
     'AG/Grazing -  10',
@@ -72,6 +74,7 @@ const ZoningFilter = ({
     'Residential - 2.5',
     'Unknown', 
   ];
+  // Snyderville Basin zoning types
   const snydervilleZoningTypes = [
     'Community Commercial', 
     'Hillside Stewardship', 
@@ -84,6 +87,7 @@ const ZoningFilter = ({
     'Unknown'
   ];
 
+  // Return and export
   return (
     <div className="grocery-filter">
       <button className="gr-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

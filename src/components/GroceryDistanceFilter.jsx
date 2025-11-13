@@ -1,8 +1,10 @@
 /* GroceryDistanceFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './GroceryDistanceFilter.css';
 
+// Define consts
 const GrTimeOptions = [
     '0 - 5 min',
     '5 - 10 min',
@@ -70,6 +72,7 @@ const GroceryDistanceFilter = ({
 }) => {
     const [isParentOpen, setIsParentOpen] = useState(false);
 
+    // Return and export
     return (
         <div className="grocery-filter">
             <button className="gr-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

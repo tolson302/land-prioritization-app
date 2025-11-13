@@ -1,8 +1,10 @@
 /* SpecialRestrictionsFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './SpecialRestrictionsFilter.css';
 
+// Define consts
 const SpecialOptions = [
     'Yes',
     'No',
@@ -52,6 +54,7 @@ const SpecialRestrictionsFilter = ({
 }) => {
     const [isParentOpen, setIsParentOpen] = useState(false);
 
+    // Return and export
     return (
         <div className="special-filter">
             <button className='sp-dropdown-toggle' onClick={() => setIsParentOpen(!isParentOpen)}>

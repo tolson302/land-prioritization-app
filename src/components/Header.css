@@ -18,13 +18,13 @@
   width: 100%;
 }
 
-/* Split into 3 regions */
+/* Split header into 3 sections */
 .header-left, .header-center, .header-right {
   display: flex;
   align-items: center;
 }
 
-/* Allocate equal space to left/center/right */
+/* Allocate equal space to left, center, and right sections */
 .header-left,
 .header-center,
 .header-right {
@@ -65,7 +65,7 @@
   height: 40px;
   width: auto;
   margin-right: 10px;
-  position: relative; /* No longer fixed */
+  position: relative;
 }
 
 .logo-text h4 {
@@ -261,5 +261,26 @@
 }
 
 .search-toggle-button:hover {
+  background-color: #aacdee;
+}
+
+.help-toggle-container {
+  position: relative;
+  display: inline-block;
+}
+
+.help-button {
+  background: #b9d6f1;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.help-button:hover {
   background-color: #aacdee;
 }

@@ -1,8 +1,10 @@
 /* OwnerTypeFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './OwnerTypeFilter.css';
 
+// Define consts
 const OwnerTypeFilter = ({ selectedType, setSelectedType, ownerTypes }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,6 +12,7 @@ const OwnerTypeFilter = ({ selectedType, setSelectedType, ownerTypes }) => {
     setIsOpen(!isOpen);
   };
 
+  // Return and export
   return (
     <div className="owner-type-filter">
       <button className="dropdown-toggle" onClick={toggleDropdown}>

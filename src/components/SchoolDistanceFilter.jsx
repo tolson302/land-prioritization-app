@@ -1,8 +1,10 @@
 /* SchoolDistanceFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './GroceryDistanceFilter.css';
 
+// Define consts
 const SchTimeOptions = [
     '0 - 5 min',
     '5 - 10 min',
@@ -62,7 +64,6 @@ const Dropdown = ({ label, selectedSchValues, setSelectedSchValues }) => {
         );
     };
     
-    
     const SchoolDistanceFilter = ({
         selectedSchWalkTime, setSelectedSchWalkTime,
         selectedSchBikeTime, setSelectedSchBikeTime,
@@ -70,6 +71,7 @@ const Dropdown = ({ label, selectedSchValues, setSelectedSchValues }) => {
     }) => {
         const [isParentOpen, setIsParentOpen] = useState(false);
     
+        // Return and export
         return (
             <div className="grocery-filter">
                 <button className="gr-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

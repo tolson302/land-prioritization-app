@@ -1,8 +1,10 @@
 /* GasDistanceFilter.jsx */
 
+// Imports
 import React, { useState } from 'react';
 import './RecDistanceFilter.css';
 
+// Define consts
 const GaTimeOptions = [
     '0 - 5 min',
     '5 - 10 min',
@@ -71,6 +73,7 @@ const Dropdown = ({ label, selectedGaValues, setSelectedGaValues }) => {
     }) => {
         const [isParentOpen, setIsParentOpen] = useState(false);
     
+        // Return and export
         return (
             <div className="rec-filter">
                 <button className="re-dropdown-toggle" onClick={() => setIsParentOpen(!isParentOpen)}>

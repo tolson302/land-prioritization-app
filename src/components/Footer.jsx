@@ -1,9 +1,11 @@
 /* Footer.jsx */
 
-import React from 'react';
+// Imports
 import './Footer.css';
 
+// Define consts
 const Footer = () => {
+    // Return and export
     return (
         <footer className="app-footer" />
     );

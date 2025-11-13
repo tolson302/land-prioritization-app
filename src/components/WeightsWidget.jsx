@@ -1,7 +1,10 @@
 /* WeightsWidget.jsx */
+
+// Imports
 import React, { useState } from 'react';
 import './WeightsWidget.css';
 
+// Define consts
 const WeightsWidget = ({ weights, setWeights, resetWeights }) => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -12,6 +15,7 @@ const WeightsWidget = ({ weights, setWeights, resetWeights }) => {
     }));
   };
 
+  // Return and export
   return (
     <div className="weights-widget-container">
       <div className="weights-widget">

@@ -1,8 +1,12 @@
+/* ParcelSearch.jsx */
+
+// Imports
 import { useState, useMemo } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import './ParcelSearch.css';
 
+// Define consts, return, and export
 export default function ParcelSearch({ parcelIndex }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);

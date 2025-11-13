@@ -1,6 +1,6 @@
 /* BarChart.jsx */
 
-import React from 'react';
+// Imports
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -22,11 +22,11 @@ ChartJS.register(
   Legend
 );
 
+// Define consts
 const BarChart = ({ labels, values }) => {
   const data = {
     labels,
-    datasets: [
-      {
+    datasets: [{
         label: 'Score',
         data: values,
         backgroundColor: [
@@ -42,7 +42,7 @@ const BarChart = ({ labels, values }) => {
           '#64f58d'
         ],
         borderColor: '#333',
-        borderWidth: 1,
+        borderWidth: 0.3,
       },
     ],
   };
@@ -68,11 +68,12 @@ const BarChart = ({ labels, values }) => {
     },
     plugins: {
       legend: {
-        display: false, // You can show this if needed
+        display: false,
       },
     },
   };
 
+  // Return and export
   return (
     <div style={{ width: '100%', height: '300px' }}>
       <Bar data={data} options={options} />
