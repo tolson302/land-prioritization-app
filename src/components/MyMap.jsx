@@ -285,9 +285,9 @@ class MyMap extends Component {
         let filteredFeatures = geoData.features.filter(feature => {
         const props = feature.properties || {};
 
-        /* This is defined, but never used. Remove? */
-        const { geoData } = this.props;
-        /* */
+        // /* This is defined, but never used. Remove? */
+        // const { geoData } = this.props;
+        // /* */
 
         const matchVacant =
             selectedVType === 'All' || props.VACANT === selectedVType;
