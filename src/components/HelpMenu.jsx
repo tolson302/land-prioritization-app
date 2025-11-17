@@ -3,10 +3,21 @@
 // Imports
 import React, { useState } from "react";
 import "./HelpMenu.css";
+// Import images
+import toolbarbtns from "../assets/help-menu-img/toolbar_buttons.png";
+import searchtool from "../assets/help-menu-img/search_tool.png";
+import parcelsearch from "../assets/help-menu-img/parcel_search.png";
+import layersbutton from "../assets/help-menu-img/layers_pane.png";
+import weightswidget from "../assets/help-menu-img/weights_widget.png";
+import resetbutton from "../assets/help-menu-img/weights-reset.png";
+import hidebutton from "../assets/help-menu-img/hide_button.png";
+import mapfilters from "../assets/help-menu-img/map_filters.png";
+import clearfilters from "../assets/help-menu-img/clear_filters.png";
 
 // Define consts
 const HelpMenu = ({ isOpen, onClose }) => {
     const slides = [
+        // Page 1
         {
             title: <div className="help-header">Help Guide</div>,
             text: <div className="eee">
@@ -17,25 +28,34 @@ const HelpMenu = ({ isOpen, onClose }) => {
                         The Legend button, located in the upper-right of the map toolbar, reveals on the legend pane, which shows what
                         different map symbols mean. To close the legend pane, click the Legend button once again.
                     </p>
+                        {/* Toolbar buttons image */}
+                        <img src={toolbarbtns} className="help-img" alt="Toolbar buttons"/>
                     <p>
-                        The Layers button, located right next to the Legend button in the map toolbar, allows you to turn on/off different basemaps and map layers. To
+                        <strong>The layers button,</strong> located right next to the Legend button in the map toolbar, allows you to turn on/off different basemaps and map layers. To
                         access the map layers, click on the Layers button, and select the buttons beside each layer to turn them on. To close the layers pane, click
                         the Layers button once again.
                     </p>
+                        {/* Layers pane image */}
+                        <img src={layersbutton} className="help-img-mini" alt="Layers pane"/>
                     <p><strong>Search Tools: </strong>
                         The search tool in the upper-left part of the map allows you to search for a street address. Simply type in
                         the desired street address, click Search, and the map will zoom to that address.
                     </p>
+                        {/* Address search tool image */}
+                        <img src={searchtool} className="help-img" alt="Address search tool"/>
                     <p> 
-                        The parcel search tool, located next to the Legend and Layers buttons in the toolbar, allows you to search
+                        <strong>The parcel search tool,</strong> located next to the Legend and Layers buttons in the toolbar, allows you to search
                         by parcel number. Click the Parcel Search button, type in a parcel number, click Search, and the map will
                         zoom to that parcel.
                     </p>
+                        {/* Parcel search tool image */}
+                        <img src={parcelsearch} className="help-img" alt="Parcel search tool"/>
                     <div className="pg-numbers">
                         Page 1 of 4
                     </div>
                 </div>
         },
+        // Page 2
         {
             title: <div className="help-header">Weights Widget</div>,
             text: <div className="eee">
@@ -64,6 +84,7 @@ const HelpMenu = ({ isOpen, onClose }) => {
                         </div>
                     </div> 
         },
+        // Page 3
         {
             title: <div className="help-header">Weights Widget Cont'd</div>,
             text: <div className="eee">
@@ -73,19 +94,26 @@ const HelpMenu = ({ isOpen, onClose }) => {
                             drag the slider to a value of 10. Then, the map will update so that parcels closest to libraries will have slightly
                             higher overall scores.
                         </p>
+                            {/* Weights widget image */}
+                            <img src={weightswidget} className="help-img-mini" alt="Weights widget"/>
                         <p>
                             To hide the Weights Widget, click the Hide button at the top of the widget. Once it's collapsed, you can click Show
                             to reopen the Weights Widget.
                         </p>
+                            {/* Hide button image */}
+                            <img src={hidebutton} className="help-img-mini" alt="Weights widget"/>
                         <p>
                             If you changed the weight values and would like to reset them, click the Reset to Default button at the bottom of
                             the Weights Widget.
                         </p>
+                            {/* Reset button image */}
+                            <img src={resetbutton} className="help-img-mini" alt="Reset weights widget"/>
                         <div className="pg-numbers">
                             Page 3 of 4
                         </div>
                     </div>
         },
+        // Page 4
         {
             title: <div className="help-header">Map Filters</div>,
             text: <div className="eee">
@@ -95,9 +123,13 @@ const HelpMenu = ({ isOpen, onClose }) => {
                         by Owner Type' and select 'Summit County', and then click on 'Filter by Grocery Distance', click on 'Filter by Grocery Walk 
                         Time', and select '0-5 min' from the options.
                     </p>
+                        {/* Map filters image */}
+                        <img src={mapfilters} className="help-img-mini" alt="Map filters"/>
                     <p>
                         To reset the filters, scroll or navigate to the bottom of the left sidebar menu, and select the blue 'Clear All Filters' button.
                     </p>
+                        {/* Clear filters image */}
+                        <img src={clearfilters} className="help-img-mini" alt="Clear all filters"/>
                     <div className="pg-numbers">
                         Page 4 of 4
                     </div>
@@ -121,25 +153,29 @@ const HelpMenu = ({ isOpen, onClose }) => {
     return (
         <div className="help-menu-container">
             <div className="help-menu">
+
                 <button onClick={onClose} className="help-close-btn">Close X</button>
 
-                {/* Slide content */}
-                <h2 className="slide-title">
-                    {slides[currentSlide].title}
-                </h2>
-                <p className="help-text">
-                    {slides[currentSlide].text}
-                </p>
+                {/* Slide content (scrolls) */}
+                <div className="help-content">
+                    <h2 className="slide-title">
+                        {slides[currentSlide].title}
+                    </h2>
+                    <div className="help-text">
+                        {slides[currentSlide].text}
+                    </div>
+                </div>
 
-                {/* Navigation buttons */}
-                <div className="flex justify-between">
-                    <button onClick={handlePrev} className={"px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg"}>
+                {/* Navigation buttons (fixed) */}
+                <div className="help-footer">
+                    <button onClick={handlePrev} className="nav-btn prev">
                         ← Previous
                     </button>
-                    <button onClick={handleNext} className={"px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg"}>
+                    <button onClick={handleNext} className="nav-btn next">
                         Next →
                     </button>
                 </div>
+                
             </div>
         </div> 
     );

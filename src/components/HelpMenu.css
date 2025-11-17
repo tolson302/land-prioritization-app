@@ -18,6 +18,28 @@
     width: 500px;
     max-width: 90%;
     position: relative;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.help-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.help-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    padding-bottom: 5px;
+    background: linear-gradient(to top, #ccc, #f7f7f7);
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    border-top: 1px solid #ddd;
 }
 
 .help-close-btn {
@@ -65,4 +87,42 @@
     padding: 4px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative; 
+}
+
+.help-img {
+    width: 400px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.help-img-mini {
+    width: 200px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Navigational buttons */
+.nav-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+}
+
+.prev {
+    background: #e5e5e5;
+}
+
+.prev:hover {
+    background: #b9b9b9;
+}
+
+.next {
+    background: #287bff;
+    color: white;
+}
+
+.next:hover {
+    background: #164897;
+    color: white;
 }
