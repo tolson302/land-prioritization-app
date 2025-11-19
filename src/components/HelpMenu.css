@@ -48,6 +48,7 @@
     right: 4px;
     background-color: #ccc;
     color: #333;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .help-close-btn:hover {
@@ -103,10 +104,18 @@
     align-items: center;
 }
 
+.help-img-micro {
+    width: 60px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
 /* Navigational buttons */
 .nav-btn {
     padding: 8px 20px;
     border-radius: 8px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .prev {

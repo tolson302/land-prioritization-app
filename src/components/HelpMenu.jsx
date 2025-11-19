@@ -7,7 +7,8 @@ import "./HelpMenu.css";
 import toolbarbtns from "../assets/help-menu-img/toolbar_buttons.png";
 import searchtool from "../assets/help-menu-img/search_tool.png";
 import parcelsearch from "../assets/help-menu-img/parcel_search.png";
-import layersbutton from "../assets/help-menu-img/layers_pane.png";
+import layerspane from "../assets/help-menu-img/layers_pane.png";
+import layersbutton from "../assets/help-menu-img/layers_button.png";
 import weightswidget from "../assets/help-menu-img/weights_widget.png";
 import resetbutton from "../assets/help-menu-img/weights-reset.png";
 import hidebutton from "../assets/help-menu-img/hide_button.png";
@@ -24,21 +25,21 @@ const HelpMenu = ({ isOpen, onClose }) => {
                     <p><strong>Map Basics: </strong>Click and drag with your mouse to pan around the Map. Use the zoom tool, located in the upper-left part of the map,
                         to zoom in and out.
                     </p>
-                    <p><strong>Legend & Layers: </strong>
-                        The Legend button, located in the upper-right of the map toolbar, reveals on the legend pane, which shows what
+                    <p>
+                        <strong>The legend button,</strong> located in the upper-right of the map toolbar, reveals on the legend pane, which shows what
                         different map symbols mean. To close the legend pane, click the Legend button once again.
                     </p>
                         {/* Toolbar buttons image */}
                         <img src={toolbarbtns} className="help-img" alt="Toolbar buttons"/>
                     <p>
-                        <strong>The layers button,</strong> located right next to the Legend button in the map toolbar, allows you to turn on/off different basemaps and map layers. To
-                        access the map layers, click on the Layers button, and select the buttons beside each layer to turn them on. To close the layers pane, click
-                        the Layers button once again.
+                        <strong>The layers button,</strong><img src={layersbutton} className="help-img-micro" alt="Layers button"/> located in the upper-right part of 
+                        the map, allows you to turn on/off different basemaps and map layers. To access the map layers, hover over the Layers button, and select the 
+                        buttons beside each layer to turn them on. To close the layers pane, click the Layers button once again.
                     </p>
                         {/* Layers pane image */}
-                        <img src={layersbutton} className="help-img-mini" alt="Layers pane"/>
-                    <p><strong>Search Tools: </strong>
-                        The search tool in the upper-left part of the map allows you to search for a street address. Simply type in
+                        <img src={layerspane} className="help-img-mini" alt="Layers pane"/>
+                    <p>
+                        <strong>The address search tool,</strong> located in the upper-left part of the map, allows you to search for a street address. Simply type in
                         the desired street address, click Search, and the map will zoom to that address.
                     </p>
                         {/* Address search tool image */}

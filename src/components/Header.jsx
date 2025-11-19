@@ -3,18 +3,11 @@
 // Imports
 import React, { useState } from 'react';
 import Legend from './Legend';
-import LayerControlPanel from './LayersControlPanel';
 import './Header.css';
 import logo from '../logo.jpg';
 
 // Define consts
 const Header = ({
-  /* Basemaps */
-  selectedBasemap,
-  setSelectedBasemap,
-  /* Overlay layers */
-  selectedOverlays,
-  setSelectedOverlays,
   /* Parcel search */
   showParcelSearch,
   setShowParcelSearch,
@@ -24,7 +17,6 @@ const Header = ({
 
 }) => {
   const [showLegend, setShowLegend] = useState(false);
-  const [showLayers, setShowLayers] = useState(false);
 
   // Return and export
   return (
@@ -63,19 +55,6 @@ const Header = ({
       <div className="legend-container">
         <button className="legend-button" onClick={() => setShowLegend(!showLegend)}>🗺️ Legend</button>
         <div className={`legend-menu ${showLegend ? 'show' : ''}`}><Legend /></div>
-      </div>
-
-      {/* Layers button */}
-      <div className="layers-container">
-        <button className="layers-button" onClick={() => setShowLayers(!showLayers)}>🧭 Layers</button>
-        <div className={`layers-menu ${showLayers ? 'show' : ''}`}>
-          <LayerControlPanel
-            selectedBasemap={selectedBasemap}
-            setSelectedBasemap={setSelectedBasemap}
-            selectedOverlays={selectedOverlays}
-            setSelectedOverlays={setSelectedOverlays}
-          />
-        </div>
       </div>
 
       {/* Parcel search toggle button */}

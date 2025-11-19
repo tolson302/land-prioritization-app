@@ -37,22 +37,18 @@
 }
 
 .close-btn {
-  color: #333;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border: #ccc;
-  border-radius: 4px;
-  background: #fff;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    background-color: #ccc;
+    color: #333;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.75rem;
 }
 
 .close-btn:hover {
-    color: #fff;
-    border: #333;
-    background: #ff0000;
+    background-color: red;
+    color: white;
     font-weight: bold;
 }
 
@@ -127,7 +123,7 @@
   cursor: pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: normal;
-  transition: background-color 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .return-top-btn:hover {

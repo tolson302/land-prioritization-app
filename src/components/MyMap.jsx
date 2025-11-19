@@ -2,7 +2,12 @@
 
 // Imports
 import React, { Component } from 'react';
-import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
+import { 
+    MapContainer, 
+    GeoJSON, 
+    TileLayer,
+    LayersControl
+} from "react-leaflet";
 import './../App';
 // Map components
 import MapboxSearchBar from './MapboxSearchBar';
@@ -232,8 +237,16 @@ class MyMap extends Component {
     closeModal = () => {
         this.setState({ selectedNeighborhood: null });
     };
-    /* */
 
+    // School Districts labels styling
+    onEachSchoolDistrict = (feature, layer) => {
+        const schDistName = (feature.properties.NAME);
+        layer.bindTooltip(schDistName, {
+            permanent: true,
+            direction: 'center',
+            className: 'sch-dist-label'
+        });
+    };
     
     // Render components
     render() {
@@ -278,8 +291,6 @@ class MyMap extends Component {
             selectedSeValue,
             selectedCoValue,
             selectedWuValue,
-            selectedBasemap,
-            selectedOverlays
         } = this.props;
 
         let filteredFeatures = geoData.features.filter(feature => {
@@ -486,8 +497,10 @@ class MyMap extends Component {
                     className="map-container" 
                     style={{ height: '100%', width: '100%' }}
                     zoom={12} 
-                    center={[40.7, -111.5]}>
-                        {/* Parcels layer */}
+                    center={[40.7, -111.5]}
+                >
+                        
+                    {/* Parcels layer */}
                     <GeoJSON 
                         key={JSON.stringify(this.props.weights) + selectedVType + selectedOwnerType + 
                             selectedGrWalkTime.join(',') +
@@ -525,137 +538,153 @@ class MyMap extends Component {
                         data={filteredFeatures} 
                         onEachFeature={this.onEachParcel}
                     />
-                    {/* Basemap layers */}
-                    {selectedBasemap === 'osm' && (
-                    <TileLayer
-                        attribution='&copy; OpenStreetMap contributors'
-                        url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    />
-                    )}
-                    {selectedBasemap === 'esri' && (
-                    <TileLayer
-                        attribution='Tiles &copy; Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, etc.'
-                        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                    />
-                    )}
-                    {selectedBasemap === 'light' && (
-                    <TileLayer
-                        attribution='Tiles &copy; Esri — Source: Esri, Garmin basemap layers, OpenStreetMap contributors, etc.'
-                        url="https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                    />
-                    )}
-                    {selectedBasemap === 'dark' && (
-                    <TileLayer
-                        attribution='Tiles &copy; Esri — Source: Esri, Garmin basemap layers, OpenStreetMap contributors, etc.'
-                        url="https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                    />
-                    )}
+
+                {/* Layers control panel */}
+                <LayersControl position="topright">
+
+                    {/* Basemap Layers */}
+                    <LayersControl.BaseLayer checked name="OpenStreetMap">
+                        <TileLayer
+                            attribution='&copy; OpenStreetMap contributors'
+                            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        /> 
+                    </LayersControl.BaseLayer>
+
+                    <LayersControl.BaseLayer name="ESRI Imagery">
+                        <TileLayer
+                            attribution='Tiles &copy; Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, etc.'
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
+                        
+                    <LayersControl.BaseLayer name="Light Gray Canvas">
+                        <TileLayer
+                            attribution='Tiles &copy; Esri — Source: Esri, Garmin basemap layers, OpenStreetMap contributors, etc.'
+                            url="https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
+
+                    <LayersControl.BaseLayer name="Dark Gray Canvas">
+                        <TileLayer
+                            attribution='Tiles &copy; Esri — Source: Esri, Garmin basemap layers, OpenStreetMap contributors, etc.'
+                            url="https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
 
                     {/* Overlay Layers */}
-                    {selectedOverlays.includes('Cities') && (
-                    <GeoJSON 
-                        data={cities} 
-                        style={{ 
-                            color: 'grey', 
-                            weight: 2, 
-                            fillOpacity: 0.1 
-                    }} 
-                        onEachFeature={this.onEachCity}
-                    />
-                    )}
-                    
-                    {selectedOverlays.includes('CDPs') && (
-                    <GeoJSON 
-                        data={cdp} 
-                        style={{ 
-                            color: 'pink', 
-                            weight: 2, 
-                            fillOpacity: 0.2 
-                    }} 
-                        onEachFeature={this.onEachCDP}
-                    />
-                    )}
+                    <LayersControl.Overlay name="Cities">
+                        <GeoJSON
+                            data={cities}
+                            onEachFeature={this.onEachCity}
+                            style={{
+                                color: 'grey',
+                                weight: 2,
+                                fillOpacity: 0.4
+                            }}
+                        />
+                    </LayersControl.Overlay>
 
-                    {selectedOverlays.includes('Neighborhoods') && (
-                    <GeoJSON 
-                        data={neighborhoods} 
-                        style={{ 
-                            color: '#7852A9', 
-                            weight: 2, 
-                            fillOpacity: 0.2 
-                    }} 
-                        onEachFeature={this.onEachNeighborhood}
-                    />
-                    )}
+                    <LayersControl.Overlay name="CDPs">
+                        <GeoJSON
+                            data={cdp}
+                            onEachFeature={this.onEachCDP}
+                            style={{
+                                color: 'pink', 
+                                weight: 2, 
+                                fillOpacity: 0.2
+                            }}
+                        />
+                    </LayersControl.Overlay>
 
-                    {selectedOverlays.includes('Planning Districts') && (
-                    <GeoJSON 
-                        data={planningDistricts} 
-                        style={this.getPlDistStyle}
-                        onEachFeature={this.onEachPlanningDistrict}
-                    />
-                    )}
+                    <LayersControl.Overlay name="Neighborhoods">
+                        <GeoJSON
+                            data={neighborhoods}
+                            onEachFeature={this.onEachNeighborhood}
+                            style={{
+                                color: '#7852A9', 
+                                weight: 2, 
+                                fillOpacity: 0.2
+                            }}
+                        />
+                    </LayersControl.Overlay>
 
-                    {selectedOverlays.includes('School Districts') && (
-                    <GeoJSON 
-                        data={schoolDistricts} 
-                        style={this.getSchDistStyle} 
-                    />
-                    )}
-                    {selectedOverlays.includes('Basin Recreation Dist.') && (
-                    <GeoJSON 
-                        data={basinRec} 
-                        style={{ 
-                            color: "#ff9100", 
-                            weight: 2.5, 
-                            fillOpacity: 0.25 
-                    }} 
-                    />
-                    )}
-                    {selectedOverlays.includes('Sewersheds') && (
-                    <GeoJSON 
-                        data={sewer} 
-                        style={{ 
-                            color: "#04ff00", 
-                            weight: 2.5, 
-                            fillOpacity: 0.25 
-                    }} 
-                    onEachFeature={this.onEachSewer}
-                    />
-                    )}
-                    {selectedOverlays.includes('UT Senate Districts') && (
-                    <GeoJSON 
-                        data={senateDistricts} 
-                        style={{ 
-                            color: "#ffff00", 
-                            weight: 5, 
-                            fillOpacity: 0 
-                    }} 
-                    onEachFeature={this.onEachSenateDist}/>
-                    )}
-                    {selectedOverlays.includes('UT House Districts') && (
-                    <GeoJSON 
-                        data={houseDistricts} 
-                        style={{ 
-                            color: "#38a800", 
-                            weight: 5, 
-                            fillOpacity: 0 
-                    }} 
-                    onEachFeature={this.onEachHouseDist}
-                    />
-                    )}
-                    {selectedOverlays.includes('Voter Precincts') && (
-                    <GeoJSON
-                        data={voterPrecincts}
-                        style={{ 
-                            color: "#8400A8", 
-                            fillColor: "#E8BEFF", 
-                            weight: 2, 
-                            fillOpacity: 0.55 
-                    }} 
-                    onEachFeature={this.onEachVoterDist}
-                    />
-                )}
+                    <LayersControl.Overlay name="Planning Districts">
+                        <GeoJSON
+                            data={planningDistricts}
+                            onEachFeature={this.onEachPlanningDistrict}
+                            style={this.getPlDistStyle}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="School Districts">
+                        <GeoJSON
+                            data={schoolDistricts}
+                            onEachFeature={this.onEachSchoolDistrict}
+                            style={this.getSchDistStyle}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="Basin Recreation Dist.">
+                        <GeoJSON
+                            data={basinRec}
+                            style={{
+                                color: "#ff9100", 
+                                weight: 2.5, 
+                                fillOpacity: 0.25 
+                            }}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="Sewersheds">
+                        <GeoJSON
+                            data={sewer}
+                            onEachFeature={this.onEachSewer}
+                            style={{ 
+                                color: "#04ff00", 
+                                weight: 2.5, 
+                                fillOpacity: 0.25
+                            }}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="UT Senate Districts">
+                        <GeoJSON
+                            data={senateDistricts}
+                            onEachFeature={this.onEachSenateDist}
+                            style={{ 
+                                color: "#ffff00", 
+                                weight: 5, 
+                                fillOpacity: 0
+                            }}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="UT House Districts">
+                        <GeoJSON
+                            data={houseDistricts}
+                            onEachFeature={this.onEachHouseDist}
+                            style={{ 
+                                color: "#38a800", 
+                                weight: 5, 
+                                fillOpacity: 0
+                            }}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="Voter Precincts">
+                        <GeoJSON
+                            data={voterPrecincts}
+                            onEachFeature={this.onEachVoterDist}
+                            style={{ 
+                                color: "#8400A8", 
+                                fillColor: "#E8BEFF", 
+                                weight: 2, 
+                                fillOpacity: 0.55
+                            }}
+                        />
+                    </LayersControl.Overlay>
+                </LayersControl>
+                
                 <MapboxSearchBar/>
                 <ChartPanel
                         parcel={this.props.selectedParcel}

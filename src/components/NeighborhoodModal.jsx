@@ -69,7 +69,7 @@ const NeighborhoodModal = ({ data, onClose }) => {
         <div className="modal-header">
             <h2>{data.NAME}</h2>
             <p><i>Neighborhood Overview</i></p>
-            <button className="close-btn" onClick={onClose}>Close X</button>
+            <button className="close-btn" onClick={onClose}>Close ✖</button>
         </div>
 
         {/* Info table */}

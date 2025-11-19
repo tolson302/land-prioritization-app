@@ -186,63 +186,6 @@
   margin-bottom: 8px;
 }
 
-.layers-container {
-  position: relative;
-}
-
-.layers-button {
-  background: #b9d6f1;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 6px;
-  border-radius: 10px;
-}
-
-.layers-button:hover {
-  background-color: #aacdee;
-}
-
-.layers-menu {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  z-index: 1000;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 12px;
-  min-width: 220px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-
-.layers-menu.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.layer-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.layer-item label {
-  margin-left: 8px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #333;
-}
-
 .search-toggle-container {
   position: relative;
   display: inline-block;
